@@ -1,0 +1,39 @@
+{
+  "name": "nucleus-packages",
+  "private": true,
+  "description": "Byjus repository with multiple packages",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "github:prerelease": "sh scripts/pre-release.sh"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "Kartik Mani",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prashant9428/auto-release.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prashant9428/auto-release/issues"
+  },
+  "homepage": "https://github.com/prashant9428/auto-release#readme",
+  "devDependencies": {
+    "auto": "^10.36.5",
+    "conventional-changelog-cli": "^2.2.2",
+    "conventional-github-releaser": "^3.1.5",
+    "lerna": "^4.0.0"
+  },
+  "changelog": {
+    "labels": {
+      "feature": "New Feature",
+      "bug": "Bug Fix"
+    }
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.22.0",
+    "@lerna/npm-dist-tag": "^4.0.0",
+    "release": "^6.3.1"
+  }
+}
