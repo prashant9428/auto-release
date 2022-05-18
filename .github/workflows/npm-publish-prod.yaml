@@ -44,10 +44,11 @@ jobs:
 
       - run: |
           npm i
-          npm i -g auto
-          export GH_TOKEN=${{secrets.GH_ADMIN_TOKEN}}
-          npx lerna exec --concurrency 1 -- auto shipit
-
+          npm i -g auto  
+          export GH_TOKEN=${{secrets.GH_ADMIN_TOKEN}}      
+          npx lerna exec --concurrency 1 -- auto version & auto changelog
+          git push --follow-tags --set-upstream origin main
+          auto release
  
         env: 
           GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
