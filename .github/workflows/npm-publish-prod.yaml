@@ -45,7 +45,25 @@ jobs:
       - run: |
           npm i
           npm i -g auto  
-          export GH_TOKEN=${{secrets.GH_ADMIN_TOKEN}}      
+          export GH_TOKEN=${{secrets.GH_ADMIN_TOKEN}}  
+
+          PACKAGE_CHANGE=$(lerna changed  --ndjson)
+          echo $PACKAGE_CHANGE
+          for item in $PACKAGE_CHANGE
+          do
+            location=$(echo $item | grep -o '"location":"[^"]*' | grep -o '[^"]*$')
+            echo "${location}"
+            cd "${location}"
+            VERSION=`auto version`
+            echo "version ${version}"
+            auto changelog
+            git add -A
+            git commit -m "chore(release): $VERSION [skip ci]"
+            git push *** HEAD:main --tags
+            VERSION_NO=`node -pe "require('./package.json').version"`
+            auto release --use-version $VERSION_NO
+          done
+    
           npx lerna exec --concurrency 1 -- auto version & auto changelog
           git push --follow-tags --set-upstream origin main
           auto release
