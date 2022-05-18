@@ -43,7 +43,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
 
       - run: |
-          
+          npm i
           npm i -g auto  
           export GH_TOKEN=${{secrets.GH_ADMIN_TOKEN}}      
           npx lerna exec --concurrency 1 -- auto shipit
