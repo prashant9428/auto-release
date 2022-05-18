@@ -8,5 +8,8 @@
     "message": "string",
     "noChangelog": false,
     "onlyGraduateWithReleaseLabel": true
+  },
+  "release":{
+    "prerelease": true
   }
 }
