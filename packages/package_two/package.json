@@ -1,5 +1,5 @@
 {
-  "name": "@auto-release/package_two",
+  "name": "@auto_release/package_two",
   "version": "0.0.0",
   "description": "Vault env is a npm library to fetch environment variables.",
   "main": "index.js",

@@ -53,8 +53,7 @@ jobs:
           echo $PACKAGE_CHANGE
 
           npx lerna version --conventional-commits --conventional-graduate --yes --force-git-tag --no-changelog
-        
-          
+               
           echo "---running sh started----"
 
           BODY=""
