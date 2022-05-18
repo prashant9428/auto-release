@@ -1,5 +1,5 @@
 {
-  "name": "nucleus-packages",
+  "name": "auto-release",
   "private": true,
   "description": "Byjus repository with multiple packages",
   "scripts": {
