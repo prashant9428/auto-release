@@ -43,30 +43,63 @@ jobs:
           registry-url: https://npm.pkg.github.com/
 
       - run: |
-          npm i
-          npm i -g auto  
-          export GH_TOKEN=${{secrets.GH_ADMIN_TOKEN}}  
+          npm i -g auto
+          export GH_TOKEN=${{secrets.GH_ADMIN_TOKEN}}
+          git config user.name "${{ secrets.GH_ADMIN_USERNAME }}"
+          git config user.email "${{ secrets.GH_ADMIN_EMAIL }}"
+          git remote set-url origin https://${{secrets.GH_ADMIN_USERNAME}}:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
 
           PACKAGE_CHANGE=$(lerna changed  --ndjson)
           echo $PACKAGE_CHANGE
+
+          npx lerna version --conventional-commits --conventional-graduate --yes --force-git-tag --no-changelog
+        
+          
+          echo "---running sh started----"
+
+          BODY=""
+
+          array=(${{join(github.event.commits.*.message,' , ') }})
+          
+          for i in "${array[@]}"
+          do
+            echo "value: ${i}"
+            if [[ "${i}" == "," ]]
+            then
+              BODY="${BODY} \n"
+            fi
+            if [[ "${i}" != "," ]]
+            then
+              BODY="${BODY} ${i}"
+            fi
+            
+          done
+
+          echo "Release Body ${BODY}"
+
           for item in $PACKAGE_CHANGE
           do
             location=$(echo $item | grep -o '"location":"[^"]*' | grep -o '[^"]*$')
             echo "${location}"
             cd "${location}"
-            VERSION=`auto version`
-            echo "version ${version}"
+           
+            PACKAGE_NAME=$(node -p -e "require('./package.json').name")
+            VERSION=$(node -p -e "require('./package.json').version")
+            NODE_VERSION="${PACKAGE_NAME}@${VERSION}"
+
             auto changelog
             git add -A
             git commit -m "chore(release): $VERSION [skip ci]"
+            npm version $VERSION -m "chore(release): %s [skip ci]"
             git push *** HEAD:main --tags
             VERSION_NO=`node -pe "require('./package.json').version"`
             auto release --use-version $VERSION_NO
+
           done
-    
-          npx lerna exec --concurrency 1 -- auto version & auto changelog
-          git push --follow-tags --set-upstream origin main
-          auto release
+
+
+          echo "---running sh stopped----"
+ 
  
         env: 
           GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
