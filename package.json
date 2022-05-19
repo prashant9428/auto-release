@@ -35,5 +35,11 @@
     "@changesets/cli": "^2.22.0",
     "@lerna/npm-dist-tag": "^4.0.0",
     "release": "^6.3.1"
+  },
+  "auto": {
+    "plugins": [
+      "npm"
+    ],
+    "onlyPublishWithReleaseLabel": true
   }
 }
