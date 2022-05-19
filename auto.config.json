@@ -10,6 +10,10 @@
     "onlyGraduateWithReleaseLabel": true
   },
   "release":{
-    "prerelease": true
-  }
+    "prerelease": false
+  },
+  "plugins": [
+    "npm",
+    ["conventional-commits", { "preset": "angular" }]
+  ]
 }
