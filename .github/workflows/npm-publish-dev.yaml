@@ -54,7 +54,7 @@ jobs:
           PACKAGE_CHANGE=$(lerna changed  --ndjson)
           echo $PACKAGE_CHANGE
 
-          npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes --force-git-tag --no-changelog --create-release github
+          npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes --force-git-tag --create-release github
           
           echo "---running sh stopped----"
           
