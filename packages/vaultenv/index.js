@@ -10,9 +10,12 @@ function config({ dotenvPath = "" } = {}) {
 
 
 
+
         
 
         
+
+
         
         const jsonFromEnv = getParsedEnv(dotenvPath);
         const { isKeyFound, notFoundAttr } = isRequiredKeyPresent(jsonFromEnv);
