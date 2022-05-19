@@ -63,6 +63,7 @@ jobs:
             location=$(echo $item | grep -o '"location":"[^"]*' | grep -o '[^"]*$')
             echo "${location}"
             cd "${location}"
+            npm i
             
             PACKAGE_NAME=$(node -p -e "require('./package.json').name")
             VERSION=$(node -p -e "require('./package.json').version")
