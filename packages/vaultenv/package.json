@@ -1,6 +1,6 @@
 {
   "name": "@lerna_package/vault",
-  "version": "0.0.0",
+  "version": "0.0.1-beta.2",
   "description": "Vault env is a npm library to fetch environment variables.",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
     "url": "git+https://github.com/prashant9428/auto-release.git"
   },
   "devDependencies": {
+    "auto": "^10.33.0",
     "semantic-release": "^19.0.2",
     "semantic-release-monorepo": "^7.0.5"
   }
