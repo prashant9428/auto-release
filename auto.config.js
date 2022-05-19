@@ -14,6 +14,6 @@ module.exports = {
   },
   "plugins": [
     "npm",
-    ["conventional-commits", { "preset": "angular" }]
+    ["conventional-commits", { "defaultReleaseType": "patch" }]
   ]
 }
