@@ -13,9 +13,6 @@ function config({ dotenvPath = "" } = {}) {
         
 
 
-        
-
-
 
         
         const jsonFromEnv = getParsedEnv(dotenvPath);
